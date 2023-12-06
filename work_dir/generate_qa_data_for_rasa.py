@@ -12,7 +12,6 @@ import pandas as pd
 import json
 from transliterate import translit
 import warnings
-# from generate_actions_for_multibot import generate_actions
 from itertools import chain
 from config import *
 
@@ -44,28 +43,28 @@ class RasaDataGenerator:
   url: "{url}"
 """)
 
-# http://localhost:5055/webhook
-# need to write: 'nlu'
+
     def save_nlu_to_file(
             self,
             intent_name: Text = 'test_intent',
             intent_examples: List = ['раз', '2 (два)', 'три'],
             output_filename: Text = 'nlu.yml'):
-        
+
         """
         Записывает данные для одного интента в указанный nlu.yml
         """
 
         output_filename = self.output_dir.joinpath(output_filename)
-        
         with open(output_filename, 'a') as fout:
-            intent_msgs_str = f"{TAB_SYMBOL * 2}- " + f'\n{TAB_SYMBOL * 2}- '.join(intent_examples)
-            fout.write(f"""- intent: {intent_name}
-{TAB_SYMBOL}examples: |
-{intent_msgs_str}
+            intent_msgs_str = f"{TAB_SYMBOL * 2}- " + f'\n{TAB_SYMBOL * 2}- '.join(intent_examples.split('.'))
 
-""")
-            
+            fout.write(f"""- intent: {intent_name}
+    {TAB_SYMBOL}examples: 
+    {intent_msgs_str}
+
+    """)
+
+
     def save_rules_to_file(
             self,
             intent_names: Text = ['test_intent', 'Два интент', 'Три интент'],
@@ -125,12 +124,12 @@ actions:{actions_str}
 
         output_filename = self.output_dir.joinpath(responses_output_filename)
 
-        responses_str = ''.join([f'{TAB_SYMBOL}- text: "{response}"\n' for response in intent_response_examples])
-
-        # template = 
+        responses_str = f"{TAB_SYMBOL * 2}- " + f'\n{TAB_SYMBOL * 2}- text: '.join(intent_response_examples.split('.'))
         with open(output_filename, 'a') as fout:
-            fout.write(f"""{TAB_SYMBOL}utter_{intent_name}:
-{responses_str}""")
+            fout.write(f"""{TAB_SYMBOL}utter_{intent_name}:\n{responses_str}""")
+
+
+
 
     def __write_headers__(self,
                           nlu_output_filename='nlu.yml',
@@ -207,33 +206,20 @@ pipeline:
                                                  df,
                                                  use_subintents = "single",
                                                  **filenames):
-        """
-        use_subintents: single, hierarchical, default
-        Отличия от обычного:
-        1. В nlu нужно записывать данные по субинтентам
-        2. В responses (а далее в domain) записываем ответы для каждого из субинтентов
-        Что осталось тем же:
-        1. rules вида intent->utter_about_intent
-        2. action_names в domain.yml включают в себя только данные по интентам (без субинтентов)
-        """
 
         self.output_dir.mkdir(parents=True, exist_ok=True) # create output_dir for dataset_name
         
         intent_names = df['intent'].unique().tolist()
-        # sub_intent_names = df['subintent'].unique().tolist() # Это для классификатора без субинтентов
         
         self.__write_headers__(**filenames)
         self.save_intent_and_action_names(intent_names=intent_names,
                                           domain_output_filename=filenames['domain_output_filename'])
-        # проходимся по каждому sub-интенту
 
         nlu_row_name = 'subintent' if use_subintents == "hierarchical" else 'intent'
 
         for _, row in df.iterrows():
             intent_examples = row['questions']
-            # intent_examples = [x for x in intent_examples if str(x) != 'nan']
-
-            # print(F"Intent_name = {row['subintent']}, examples = {intent_examples}")
+            
             self.save_nlu_to_file(intent_name=row[nlu_row_name],
                                   intent_examples=intent_examples,
                                   output_filename=filenames['nlu_output_filename']
@@ -261,7 +247,7 @@ pipeline:
                 
             generate_actions(output_dir=self.output_dir,
                              json_filename=json_filename,
-                             expert_actions=action_names)            # df[['intent']].to_excel(self.output_dir.joinpath("intent_names.xlsx"), index=False)
+                             expert_actions=action_names)
             for action_name, webhook_url in action_names_webhooks.items():
                 expert_dir = self.output_dir.joinpath(action_name)
                 expert_dir.mkdir(exist_ok=True)
@@ -318,13 +304,12 @@ def transform_intent_names(df):
     """
     df['intent'] = df['intent'].apply(clean_and_transliterate)
 
-    # Replace NaN values with an empty string
     df['intent'] = df['intent'].fillna('').astype(str)
         
 def split_df_by_intents(df):
 
     intent_names = df.intent.unique().tolist()
-    # intent_names = [intent.replace(' ', '_') for intent in intent_names]
+
 
     intent_dataframes = {intent: df[df['intent'] == intent]
                         for intent in intent_names}
@@ -357,27 +342,6 @@ def merge_intent_dataframes(intent_dataframes):
 
     return final_df
 
-# convert q&a list serialized as `str` to lists
-# def clean_qa(question_or_answer_text):
-#     if isinstance(question_or_answer_text, str):
-#         text = question_or_answer_text.strip()
-#         clean_map = {
-#             "\n": "",
-#             '"': "'",
-#             "'": "",  # Remove single quotes
-#         }
-#         for char, replace_value in clean_map.items():
-#             text = text.replace(char, replace_value)
-
-#         return f"'''{text}'''" if text else "''"
-#     elif isinstance(question_or_answer_text, list):
-#         return [clean_qa(item) for item in question_or_answer_text]
-#     else:
-#         return "''"
-
-# clean_and_eval = lambda x: [clean_qa(string.replace('\n', ' ')) for string in eval(x.replace('\n', ' '))]
-
-
 def pipe(working_dir: Path, dataset_name: Text, use_subintents: bool  ):
 
     data_filename = working_dir.joinpath(f'{dataset_name}.xlsx')
@@ -404,7 +368,6 @@ def pipe(working_dir: Path, dataset_name: Text, use_subintents: bool  ):
         qa_df[col_name] = qa_df[col_name]
     
     transform_intent_names(qa_df)
-
     intent_dataframes = split_df_by_intents(qa_df)
     
     
@@ -432,7 +395,7 @@ def pipe(working_dir: Path, dataset_name: Text, use_subintents: bool  ):
 """
 if __name__ == "__main__":
 
-    dataset_names = ["data_with_merged_questions"]
+    dataset_names = ["merge"]
     use_subintents = ['default', 'single'][-1] #True
     for dataset_name in dataset_names[:1]:
         print(f"Processing {dataset_name}")
