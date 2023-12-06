@@ -1,5 +1,3 @@
-
-
 """
 Скрипт для генерации конфигов в RASA
 
@@ -16,14 +14,10 @@ from transliterate import translit
 import warnings
 # from generate_actions_for_multibot import generate_actions
 from itertools import chain
+from config import *
 
 warnings.filterwarnings('ignore')
 
-TAB_SYMBOL = ' ' * 2
-#WORKING_DIR = Path('/Users/sasha/Desktop/pp/PP23')
-WORKING_DIR = Path('data')
-OUTPUT_DIR = WORKING_DIR.joinpath('output')
-DIET_EPOCHS = 50
 
 class RasaDataGenerator:
     """
@@ -74,7 +68,7 @@ class RasaDataGenerator:
             
     def save_rules_to_file(
             self,
-            intent_names: Text = ['test_intent', 'ДВа интент', 'Три интент'],
+            intent_names: Text = ['test_intent', 'Два интент', 'Три интент'],
             output_filename: Text = "rules.yml"):
         """
         Записывает правила 
@@ -302,27 +296,30 @@ pipeline:
 
 def clean_and_transliterate(intent_name):
     def clean(string: str):
-        string = string.lower()
+        string = string.lower().strip() if isinstance(string, str) else ''
         for symbol, replace_value in {
-            # "«": ""
             ',': "",
             ".": "",
             '"': '',
-            ' ' : '_',
-            }.items():
+            ' ': '_',
+        }.items():
             string = string.replace(symbol, replace_value)
         return string
 
     res = translit(clean(intent_name), 'ru', reversed=True)
     return res
 
+
+
 def transform_intent_names(df):
     
     """
     Переводит имя интента в валидную для RASA строку 
     """
-    df['intent'] = df['intent'].map(
-        lambda x: clean_and_transliterate(x))
+    df['intent'] = df['intent'].apply(clean_and_transliterate)
+
+    # Replace NaN values with an empty string
+    df['intent'] = df['intent'].fillna('').astype(str)
         
 def split_df_by_intents(df):
 
@@ -361,23 +358,29 @@ def merge_intent_dataframes(intent_dataframes):
     return final_df
 
 # convert q&a list serialized as `str` to lists
-def clean_qa(question_or_answer_text: str):
-    text = question_or_answer_text.strip() #
-    clean_map = {
-                "\n": "",
-                '"': "'",
-                }
-    for char in clean_map:
-        text = text.replace(char, clean_map[char])
-    
-    return text
+# def clean_qa(question_or_answer_text):
+#     if isinstance(question_or_answer_text, str):
+#         text = question_or_answer_text.strip()
+#         clean_map = {
+#             "\n": "",
+#             '"': "'",
+#             "'": "",  # Remove single quotes
+#         }
+#         for char, replace_value in clean_map.items():
+#             text = text.replace(char, replace_value)
 
-clean_and_eval = lambda x: [clean_qa(string) for string in eval(x)]
+#         return f"'''{text}'''" if text else "''"
+#     elif isinstance(question_or_answer_text, list):
+#         return [clean_qa(item) for item in question_or_answer_text]
+#     else:
+#         return "''"
+
+# clean_and_eval = lambda x: [clean_qa(string.replace('\n', ' ')) for string in eval(x.replace('\n', ' '))]
+
 
 def pipe(working_dir: Path, dataset_name: Text, use_subintents: bool  ):
 
-    data_filename = working_dir.joinpath('data',
-                                         f'{dataset_name}_with_merged_questions.xlsx')
+    data_filename = working_dir.joinpath(f'{dataset_name}.xlsx')
     output_filenames = {
         f"{config_type}_output_filename": f'{config_type}_{dataset_name}.yml'
         for config_type in
@@ -398,7 +401,7 @@ def pipe(working_dir: Path, dataset_name: Text, use_subintents: bool  ):
 
 
     for col_name in ['answers', 'questions']:
-        qa_df[col_name] = qa_df[col_name].map(clean_and_eval)
+        qa_df[col_name] = qa_df[col_name]
     
     transform_intent_names(qa_df)
 
@@ -429,7 +432,7 @@ def pipe(working_dir: Path, dataset_name: Text, use_subintents: bool  ):
 """
 if __name__ == "__main__":
 
-    dataset_names = ["hr_with_links_latest"]    #, 'uchebnik_new', 'adaptation']#['pte', 'uchebnik']
+    dataset_names = ["data_with_merged_questions"]
     use_subintents = ['default', 'single'][-1] #True
     for dataset_name in dataset_names[:1]:
         print(f"Processing {dataset_name}")
