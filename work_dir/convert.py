@@ -36,6 +36,11 @@ def write_response_yaml(data, output_file='output.yml'):
             for entry in entries:
                 file.write(f"  - intent: {entry['intent']}\n")
                 file.write(f"    answers_merged: {entry['answers_merged']}\n")
+                res = entry['answers_merged']
+                res = res.replace('[','')
+                res = res.replace(']','')
+                print(eval(res))
+                
 
 if __name__ == "__main__":
     file_path = 'data/merge.xlsx'
