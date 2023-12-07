@@ -39,6 +39,8 @@ def write_response_yaml(data, output_file='output.yml'):
                 res = entry['answers_merged']
                 res = res.replace('[','')
                 res = res.replace(']','')
+                import json
+
                 print(eval(res))
                 
 
