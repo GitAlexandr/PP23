@@ -62,7 +62,7 @@ class RasaDataGenerator:
             
             
             intent_msgs_str = f"{TAB_SYMBOL * 2}- " + f'\n{TAB_SYMBOL * 2} '.join(intent_examples)
-            print(intent_msgs_str)
+            # print(intent_msgs_str)
             
             fout.write(f"""- intent: {intent_name}
     {TAB_SYMBOL}examples: |
@@ -130,14 +130,12 @@ actions:{actions_str}
 
         output_filename = self.output_dir.joinpath(responses_output_filename)
 
-        intent_response_examples = intent_response_examples.replace('[','')
-        intent_response_examples = intent_response_examples.replace(']','')
-        intent_response_examples = eval(intent_response_examples) 
-        
+        intent_response_examples = eval(intent_response_examples.replace('[','').replace(']',''))
 
-        responses_str = f"{TAB_SYMBOL * 2}- " + f'\n{TAB_SYMBOL * 2}- text: '.join(intent_response_examples)
+        responses_str = "- text: " + f'\n{TAB_SYMBOL * 2}- text: '.join(intent_response_examples)
         with open(output_filename, 'a') as fout:
-            fout.write(f"""{TAB_SYMBOL}utter_{intent_name}:\n{responses_str}""")
+            fout.write(f"""\n{TAB_SYMBOL * 2}utter_{intent_name}:
+  {responses_str}\n""")
 
 
 
