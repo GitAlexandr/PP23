@@ -56,19 +56,14 @@ class RasaDataGenerator:
 
         output_filename = self.output_dir.joinpath(output_filename)
         with open(output_filename, 'a') as fout:
-            intent_examples = intent_examples.replace('[','')
-            intent_examples = intent_examples.replace(']','')
-            intent_examples = eval(intent_examples) 
+            intent_examples = eval(intent_examples.replace('[','').replace(']',''))
             
-            
-            intent_msgs_str = f"{TAB_SYMBOL * 2}- " + f'\n{TAB_SYMBOL * 2} '.join(intent_examples)
-            # print(intent_msgs_str)
-            
+            intent_msgs_str = f"{TAB_SYMBOL * 2}- " + f'\n{TAB_SYMBOL * 2}  - '.join(intent_examples)
             fout.write(f"""- intent: {intent_name}
-    {TAB_SYMBOL}examples: |
-    {intent_msgs_str}
+{TAB_SYMBOL * 2}examples: |
+  {intent_msgs_str}
 
-    """)
+""")
 
 
     def save_rules_to_file(
