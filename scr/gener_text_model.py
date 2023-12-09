@@ -3,12 +3,13 @@ import pandas as pd
 from docx import Document
 from nltk import sent_tokenize, word_tokenize
 import nltk
+import openai
 
 nltk.download('punkt')
 
-def process_messages(message):
-    url = "https://chatgpt-42.p.rapidapi.com/gpt4"
+openai.api_key = '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'
 
+def process_messages(message):
     first_message = f"Задай краткий вопрос по следующему тексту:\n{message}"
     second_message = f"Переформулируй тремя различными способами следующий вопрос и напиши это списком:\n{first_message}"
     third_message = f"Сократи до 7 слов следующий текст:\n{message}"
@@ -16,30 +17,17 @@ def process_messages(message):
 
     questions = [first_message, second_message, third_message, fourth_message]
 
-    payloads = [
-        {
-            "messages": [
-                {
-                    "role": "user",
-                    "content": question
-                }
-            ],
-            "tone": "Balanced"
-        }
-        for question in questions
-    ]
-    
-    headers = {
-        "content-type": "application/json",
-        "X-RapidAPI-Key": "0f4fc91112mshac6ca50c42a20fcp18e4bajsn3e4fb2d0f8cf",
-        "X-RapidAPI-Host": "chatgpt-42.p.rapidapi.com"
-    }
-
     list_response = []
 
-    for payload in payloads:
-        response = requests.post(url, json=payload, headers=headers)
-        result = response.json()['result']
+    
+    for question in questions:
+        response = openai.Completion.create(
+            engine="text-davinci-002", 
+            prompt=question,
+            temperature=0.7,
+            max_tokens=150
+        )
+        result = response['choices'][0]['text']
         list_response.append(result)
         print(result)
 
