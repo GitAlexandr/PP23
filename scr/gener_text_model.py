@@ -4,10 +4,12 @@ from docx import Document
 from nltk import sent_tokenize, word_tokenize
 import nltk
 import openai
+from openai.error import RateLimitError
+import time
 
 nltk.download('punkt')
 
-openai.api_key = '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'
+openai.api_key = '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'
 
 def process_messages(message):
     first_message = f"Задай краткий вопрос по следующему тексту:\n{message}"
@@ -21,15 +23,29 @@ def process_messages(message):
 
     
     for question in questions:
-        response = openai.Completion.create(
-            engine="text-davinci-002", 
-            prompt=question,
-            temperature=0.7,
-            max_tokens=150
-        )
-        result = response['choices'][0]['text']
-        list_response.append(result)
-        print(result)
+            try:
+                response = openai.Completion.create(
+                    engine="text-davinci-002", 
+                    prompt=question,
+                    temperature=0.7,
+                    max_tokens=150
+                )
+                result = response['choices'][0]['text']
+                list_response.append(result)
+                print(result)
+            except RateLimitError as e:
+                print(f"Rate limit exceeded. Waiting for 60 seconds before retrying...")
+                time.sleep(60)
+                # Retry the request
+                response = openai.Completion.create(
+                    engine="text-davinci-002", 
+                    prompt=question,
+                    temperature=0.7,
+                    max_tokens=150
+                )
+                result = response['choices'][0]['text']
+                list_response.append(result)
+                print(result)
 
     main_theme = """ИНСТРУКЦИЯ ПО СИГНАЛИЗАЦИИ НА ЖЕЛЕЗНОДОРОЖНОМ ТРАНСПОРТЕ РОССИЙСКОЙ ФЕДЕРАЦИИ"""
 
