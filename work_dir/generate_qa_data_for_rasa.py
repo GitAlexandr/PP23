@@ -56,7 +56,7 @@ class RasaDataGenerator:
 
         output_filename = self.output_dir.joinpath(output_filename)
         with open(output_filename, 'a') as fout:
-            intent_examples = eval(intent_examples.replace('[','').replace(']',''))
+            intent_examples = eval(intent_examples.replace('[','').replace(']','').replace('\n', ''))
             
             intent_msgs_str = f"{TAB_SYMBOL * 2}- " + f'\n{TAB_SYMBOL * 2}  - '.join(intent_examples)
             fout.write(f"""- intent: {intent_name}
@@ -125,7 +125,7 @@ actions:{actions_str}
 
         output_filename = self.output_dir.joinpath(responses_output_filename)
 
-        intent_response_examples = eval(intent_response_examples.replace('[','').replace(']',''))
+        intent_response_examples = eval(intent_response_examples.replace('[','').replace(']','').replace('\n', ''))
 
         responses_str = "- text: " + f'\n{TAB_SYMBOL * 2}- text: '.join(intent_response_examples)
         with open(output_filename, 'a') as fout:
