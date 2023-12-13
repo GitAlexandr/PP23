@@ -1,0 +1,322 @@
+rules:
+
+- rule: new rule about _question_213
+  steps:
+  - intent: _question_213
+  - action: utter__question_213
+- rule: new rule about _question_214
+  steps:
+  - intent: _question_214
+  - action: utter__question_214
+- rule: new rule about _question_215
+  steps:
+  - intent: _question_215
+  - action: utter__question_215
+- rule: new rule about _question_216
+  steps:
+  - intent: _question_216
+  - action: utter__question_216
+- rule: new rule about _question_217
+  steps:
+  - intent: _question_217
+  - action: utter__question_217
+- rule: new rule about _question_218
+  steps:
+  - intent: _question_218
+  - action: utter__question_218
+- rule: new rule about _question_219
+  steps:
+  - intent: _question_219
+  - action: utter__question_219
+- rule: new rule about _question_220
+  steps:
+  - intent: _question_220
+  - action: utter__question_220
+- rule: new rule about _question_221
+  steps:
+  - intent: _question_221
+  - action: utter__question_221
+- rule: new rule about _question_222
+  steps:
+  - intent: _question_222
+  - action: utter__question_222
+- rule: new rule about _question_223
+  steps:
+  - intent: _question_223
+  - action: utter__question_223
+- rule: new rule about _question_224
+  steps:
+  - intent: _question_224
+  - action: utter__question_224
+- rule: new rule about _question_225
+  steps:
+  - intent: _question_225
+  - action: utter__question_225
+- rule: new rule about _question_226
+  steps:
+  - intent: _question_226
+  - action: utter__question_226
+- rule: new rule about _question_227
+  steps:
+  - intent: _question_227
+  - action: utter__question_227
+- rule: new rule about _question_228
+  steps:
+  - intent: _question_228
+  - action: utter__question_228
+- rule: new rule about _question_229
+  steps:
+  - intent: _question_229
+  - action: utter__question_229
+- rule: new rule about _question_230
+  steps:
+  - intent: _question_230
+  - action: utter__question_230
+- rule: new rule about _question_231
+  steps:
+  - intent: _question_231
+  - action: utter__question_231
+- rule: new rule about _question_232
+  steps:
+  - intent: _question_232
+  - action: utter__question_232
+- rule: new rule about _question_233
+  steps:
+  - intent: _question_233
+  - action: utter__question_233
+- rule: new rule about _question_234
+  steps:
+  - intent: _question_234
+  - action: utter__question_234
+- rule: new rule about _question_235
+  steps:
+  - intent: _question_235
+  - action: utter__question_235
+- rule: new rule about _question_236
+  steps:
+  - intent: _question_236
+  - action: utter__question_236
+- rule: new rule about _question_237
+  steps:
+  - intent: _question_237
+  - action: utter__question_237
+- rule: new rule about _question_238
+  steps:
+  - intent: _question_238
+  - action: utter__question_238
+- rule: new rule about _question_239
+  steps:
+  - intent: _question_239
+  - action: utter__question_239
+- rule: new rule about _question_240
+  steps:
+  - intent: _question_240
+  - action: utter__question_240
+- rule: new rule about _question_241
+  steps:
+  - intent: _question_241
+  - action: utter__question_241
+- rule: new rule about _question_242
+  steps:
+  - intent: _question_242
+  - action: utter__question_242
+- rule: new rule about _question_243
+  steps:
+  - intent: _question_243
+  - action: utter__question_243
+- rule: new rule about _question_244
+  steps:
+  - intent: _question_244
+  - action: utter__question_244
+- rule: new rule about _question_245
+  steps:
+  - intent: _question_245
+  - action: utter__question_245
+- rule: new rule about _question_246
+  steps:
+  - intent: _question_246
+  - action: utter__question_246
+- rule: new rule about _question_247
+  steps:
+  - intent: _question_247
+  - action: utter__question_247
+- rule: new rule about _question_248
+  steps:
+  - intent: _question_248
+  - action: utter__question_248
+- rule: new rule about _question_249
+  steps:
+  - intent: _question_249
+  - action: utter__question_249
+- rule: new rule about _question_250
+  steps:
+  - intent: _question_250
+  - action: utter__question_250
+- rule: new rule about _question_251
+  steps:
+  - intent: _question_251
+  - action: utter__question_251
+- rule: new rule about _question_252
+  steps:
+  - intent: _question_252
+  - action: utter__question_252
+- rule: new rule about _question_253
+  steps:
+  - intent: _question_253
+  - action: utter__question_253
+- rule: new rule about _question_254
+  steps:
+  - intent: _question_254
+  - action: utter__question_254
+- rule: new rule about _question_255
+  steps:
+  - intent: _question_255
+  - action: utter__question_255
+- rule: new rule about _question_256
+  steps:
+  - intent: _question_256
+  - action: utter__question_256
+- rule: new rule about _question_257
+  steps:
+  - intent: _question_257
+  - action: utter__question_257
+- rule: new rule about _question_258
+  steps:
+  - intent: _question_258
+  - action: utter__question_258
+- rule: new rule about _question_259
+  steps:
+  - intent: _question_259
+  - action: utter__question_259
+- rule: new rule about _question_260
+  steps:
+  - intent: _question_260
+  - action: utter__question_260
+- rule: new rule about _question_261
+  steps:
+  - intent: _question_261
+  - action: utter__question_261
+- rule: new rule about _question_262
+  steps:
+  - intent: _question_262
+  - action: utter__question_262
+- rule: new rule about _question_263
+  steps:
+  - intent: _question_263
+  - action: utter__question_263
+- rule: new rule about _question_264
+  steps:
+  - intent: _question_264
+  - action: utter__question_264
+- rule: new rule about _question_265
+  steps:
+  - intent: _question_265
+  - action: utter__question_265
+- rule: new rule about _question_266
+  steps:
+  - intent: _question_266
+  - action: utter__question_266
+- rule: new rule about _question_267
+  steps:
+  - intent: _question_267
+  - action: utter__question_267
+- rule: new rule about _question_268
+  steps:
+  - intent: _question_268
+  - action: utter__question_268
+- rule: new rule about _question_269
+  steps:
+  - intent: _question_269
+  - action: utter__question_269
+- rule: new rule about _question_270
+  steps:
+  - intent: _question_270
+  - action: utter__question_270
+- rule: new rule about _question_271
+  steps:
+  - intent: _question_271
+  - action: utter__question_271
+- rule: new rule about _question_272
+  steps:
+  - intent: _question_272
+  - action: utter__question_272
+- rule: new rule about _question_273
+  steps:
+  - intent: _question_273
+  - action: utter__question_273
+- rule: new rule about _question_274
+  steps:
+  - intent: _question_274
+  - action: utter__question_274
+- rule: new rule about _question_275
+  steps:
+  - intent: _question_275
+  - action: utter__question_275
+- rule: new rule about _question_276
+  steps:
+  - intent: _question_276
+  - action: utter__question_276
+- rule: new rule about _question_277
+  steps:
+  - intent: _question_277
+  - action: utter__question_277
+- rule: new rule about _question_278
+  steps:
+  - intent: _question_278
+  - action: utter__question_278
+- rule: new rule about _question_279
+  steps:
+  - intent: _question_279
+  - action: utter__question_279
+- rule: new rule about _question_280
+  steps:
+  - intent: _question_280
+  - action: utter__question_280
+- rule: new rule about _question_281
+  steps:
+  - intent: _question_281
+  - action: utter__question_281
+- rule: new rule about _question_282
+  steps:
+  - intent: _question_282
+  - action: utter__question_282
+- rule: new rule about _question_283
+  steps:
+  - intent: _question_283
+  - action: utter__question_283
+- rule: new rule about _question_284
+  steps:
+  - intent: _question_284
+  - action: utter__question_284
+- rule: new rule about _question_285
+  steps:
+  - intent: _question_285
+  - action: utter__question_285
+- rule: new rule about _question_286
+  steps:
+  - intent: _question_286
+  - action: utter__question_286
+- rule: new rule about _question_287
+  steps:
+  - intent: _question_287
+  - action: utter__question_287
+- rule: new rule about _question_288
+  steps:
+  - intent: _question_288
+  - action: utter__question_288
+- rule: new rule about _question_289
+  steps:
+  - intent: _question_289
+  - action: utter__question_289
+- rule: new rule about _question_290
+  steps:
+  - intent: _question_290
+  - action: utter__question_290
+- rule: new rule about _question_291
+  steps:
+  - intent: _question_291
+  - action: utter__question_291
+- rule: new rule about _question_292
+  steps:
+  - intent: _question_292
+  - action: utter__question_292
