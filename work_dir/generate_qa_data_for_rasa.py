@@ -128,6 +128,7 @@ actions:{actions_str}
         intent_response_examples = eval(intent_response_examples.replace('[','').replace(']','').replace('\n', ''))
 
         responses_str = "- text: " + f'\n{TAB_SYMBOL * 2}- text: '.join(intent_response_examples)
+        responses_str = f'{responses_str}'
         with open(output_filename, 'a') as fout:
             fout.write(f"""\n{TAB_SYMBOL * 2}utter_{intent_name}:
   {responses_str}\n""")
