@@ -161,7 +161,7 @@ actions:{actions_str}
         responses_str = "- text: " + f'\n{TAB_SYMBOL * 2}- text: '.join(
             [f'"{response}"' for response in intent_response_examples])  # Обособляем кавычками
 
-        # responses_str = responses_str.replace('"', '«').replace('"', '»')
+
 
         with open(output_filename, 'a') as fout:
             fout.write(f"""\n{TAB_SYMBOL * 2}utter_{intent_name}:
@@ -245,7 +245,7 @@ pipeline:
                                                  use_subintents = "single",
                                                  **filenames):
 
-        self.output_dir.mkdir(parents=True, exist_ok=True) # create output_dir for dataset_name
+        self.output_dir.mkdir(parents=True, exist_ok=True)
         
         intent_names = df['intent'].unique().tolist()
         
