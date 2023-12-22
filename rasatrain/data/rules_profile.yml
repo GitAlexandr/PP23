@@ -1,0 +1,28 @@
+version: "3.1"
+
+rules:
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: hello
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: bot-name
+  steps:
+  - intent: bot_name
+  - action: utter_bot_name
+
+- rule: mood
+  steps:
+  - intent: mood
+  - action: utter_mood

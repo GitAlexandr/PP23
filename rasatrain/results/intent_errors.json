@@ -1,0 +1,122 @@
+[
+  {
+    "text": "Каковы сроки согласования сложных документов?",
+    "intent": "_question_19",
+    "intent_prediction": {
+      "name": "_question_20",
+      "confidence": 0.49580779671669006
+    }
+  },
+  {
+    "text": "Какие документы редактирует отдел редактирования?",
+    "intent": "_question_48",
+    "intent_prediction": {
+      "name": "_question_49",
+      "confidence": 0.5858170390129089
+    }
+  },
+  {
+    "text": "Какие типы документов подлежат редактированию отделом редактирования?",
+    "intent": "_question_48",
+    "intent_prediction": {
+      "name": "_question_49",
+      "confidence": 0.5705761909484863
+    }
+  },
+  {
+    "text": "Какие проекты документов не редактируются отделом редактирования?",
+    "intent": "_question_48",
+    "intent_prediction": {
+      "name": "_question_49",
+      "confidence": 0.5823564529418945
+    }
+  },
+  {
+    "text": "Какие элементы включаются в подписываемый документ?",
+    "intent": "_question_55",
+    "intent_prediction": {
+      "name": "_question_58",
+      "confidence": 0.5480398535728455
+    }
+  },
+  {
+    "text": "Что включается в документ при подписании?",
+    "intent": "_question_55",
+    "intent_prediction": {
+      "name": "_question_58",
+      "confidence": 0.5281018614768982
+    }
+  },
+  {
+    "text": "Какие элементы указываются в документе при подписании?",
+    "intent": "_question_55",
+    "intent_prediction": {
+      "name": "_question_58",
+      "confidence": 0.6562426686286926
+    }
+  },
+  {
+    "text": "Каким образом должна завершаться преамбула приказа?",
+    "intent": "_question_249",
+    "intent_prediction": {
+      "name": "_question_251",
+      "confidence": 0.4767642021179199
+    }
+  },
+  {
+    "text": "В каких случаях в пунктах и подпунктах распорядительной части приказа (распоряжения) не указывается срок исполнения?",
+    "intent": "_question_258",
+    "intent_prediction": {
+      "name": "_question_259",
+      "confidence": 0.5441505908966064
+    }
+  },
+  {
+    "text": "Укажите, в каких ситуациях в пунктах и подпунктах распорядительной части приказа (распоряжения) не указывается срок выполнения действий?",
+    "intent": "_question_258",
+    "intent_prediction": {
+      "name": "_question_259",
+      "confidence": 0.4755675196647644
+    }
+  },
+  {
+    "text": "Опишите случаи, когда в пунктах и подпунктах распорядительной части приказа (распоряжения) не указывается срок исполнения заданий?",
+    "intent": "_question_258",
+    "intent_prediction": {
+      "name": "_question_259",
+      "confidence": 0.4636363089084625
+    }
+  },
+  {
+    "text": "Как нумеруются подпункты приказа (распоряжения)?",
+    "intent": "_question_264",
+    "intent_prediction": {
+      "name": "_question_260",
+      "confidence": 0.5076857209205627
+    }
+  },
+  {
+    "text": "Как осуществляется нумерация подпунктов приказа (распоряжения)?",
+    "intent": "_question_264",
+    "intent_prediction": {
+      "name": "_question_260",
+      "confidence": 0.5279789566993713
+    }
+  },
+  {
+    "text": "Укажите порядок нумерации подпунктов приказа (распоряжения)?",
+    "intent": "_question_264",
+    "intent_prediction": {
+      "name": "_question_260",
+      "confidence": 0.7072885632514954
+    }
+  },
+  {
+    "text": "Как правильно указывать должность подписанта в приказе общества?",
+    "intent": "_question_294",
+    "intent_prediction": {
+      "name": "_question_296",
+      "confidence": 0.6493708491325378
+    }
+  }
+]

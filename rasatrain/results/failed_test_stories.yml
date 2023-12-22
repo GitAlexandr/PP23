@@ -1,0 +1,51 @@
+version: "3.1"
+stories:
+- story: happy path 1 (./tests/test_stories.yml)
+  steps:
+  - intent: greet  # predicted: affirm: hello there!
+  - action: utter_greet
+  - intent: mood_great  # predicted: affirm: amazing
+  - action: utter_happy
+- story: happy path 2 (./tests/test_stories.yml)
+  steps:
+  - intent: greet  # predicted: affirm: hello there!
+  - action: utter_greet
+  - intent: mood_great  # predicted: affirm: amazing
+  - action: utter_happy
+  - intent: goodbye  # predicted: affirm: bye-bye!
+  - action: utter_goodbye
+- story: sad path 1 (./tests/test_stories.yml)
+  steps:
+  - intent: greet  # predicted: affirm: hello
+  - action: utter_greet
+  - intent: mood_unhappy  # predicted: affirm: not good
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+- story: sad path 2 (./tests/test_stories.yml)
+  steps:
+  - intent: greet  # predicted: affirm: hello
+  - action: utter_greet
+  - intent: mood_unhappy  # predicted: affirm: not good
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny  # predicted: affirm: not really
+  - action: utter_goodbye
+- story: sad path 3 (./tests/test_stories.yml)
+  steps:
+  - intent: greet  # predicted: affirm: hi
+  - action: utter_greet
+  - intent: mood_unhappy  # predicted: affirm: very terrible
+  - action: utter_cheer_up
+  - action: utter_did_that_help
+  - intent: deny  # predicted: affirm: no
+  - action: utter_goodbye
+- story: say goodbye (./tests/test_stories.yml)
+  steps:
+  - intent: goodbye  # predicted: affirm: bye-bye!
+  - action: utter_goodbye
+- story: bot challenge (./tests/test_stories.yml)
+  steps:
+  - intent: bot_challenge  # predicted: affirm: are you a bot?
+  - action: utter_iamabot
