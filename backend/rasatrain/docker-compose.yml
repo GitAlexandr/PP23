@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  minio:
+    image: minio/minio
+    container_name: minio
+    environment:
+      MINIO_ACCESS_KEY: your_access_key
+      MINIO_SECRET_KEY: your_secret_key
+    volumes:
+      - /path/to/minio/data:/data
+    ports:
+      - "9000:9000"
+    command: server /data
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi
+    ports:
+      - "8000:8000"
+    environment:
+      MINIO_SERVER: minio
+      MINIO_ACCESS_KEY: your_access_key
+      MINIO_SECRET_KEY: your_secret_key
+      MINIO_BUCKET_NAME: your_bucket_name
+      RASA_MODEL_PATH: /app/rasatrain/models
+    depends_on:
+      - minio
