@@ -56,7 +56,7 @@ const store = createStore({
     actions: {
         async sendMessageToChat({ commit }, message) {
             try {
-                const response = await axios.post('http://localhost:8000/chat', { message });
+                const response = await axios.post('http://127.0.0.1:8000/chat', { message });
 
                 const userMessage = {
                     author: 'user',

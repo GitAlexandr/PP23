@@ -3,13 +3,15 @@ from pydantic import BaseModel
 from rasa.core.agent import Agent
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+
 
 
 app = FastAPI()
 
 origins = [
     "http://localhost",
-    "http://localhost:5174/",
+    "http://localhost:5173",
 ]
 
 app.add_middleware(
@@ -38,4 +40,4 @@ async def chat(message: Message):
     
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000) 
