@@ -50,6 +50,15 @@
    cd backend/rasatrain 
    ```
    ```
+   python -m venv
+   ```
+   ```
+   source venv/bin/activate
+   ```
+   ```
+   pip install -r requirements.txt
+   ```
+   ```
    rasa train nlu
    ```
    ```
@@ -60,3 +69,4 @@
    ```
 
 **Теперь Вы можете задать ему любой вопрос о документообороте и он Вам ответит!**
+**Для этого перейдите по данной ссылке: http://127.0.0.1:5174**
