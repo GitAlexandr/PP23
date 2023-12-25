@@ -1,0 +1,23 @@
+:root {
+    --main-color: #da4b1a;
+    --contrasting-color: red;
+    --background-color: #d9d9d9;
+    --text-color-white: white;
+    --text-color-black: black;
+    --text-color-dark-grey: #646464;
+    --box-shadow-color: #00000019;
+    --background-hover: #eaeaea;
+    --transparent-black-background: #0000007F
+}
+
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
