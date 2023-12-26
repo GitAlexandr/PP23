@@ -5,8 +5,8 @@ services:
     image: minio/minio
     container_name: minio
     environment:
-      MINIO_ACCESS_KEY: your_access_key
-      MINIO_SECRET_KEY: your_secret_key
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
     volumes:
       - /path/to/minio/data:/data
     ports:
@@ -22,9 +22,9 @@ services:
       - "8000:8000"
     environment:
       MINIO_SERVER: minio
-      MINIO_ACCESS_KEY: your_access_key
-      MINIO_SECRET_KEY: your_secret_key
-      MINIO_BUCKET_NAME: your_bucket_name
-      RASA_MODEL_PATH: /app/rasatrain/models
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      MINIO_BUCKET_NAME: /backend/rasatrain/minio
+      RASA_MODEL_PATH: /backend/rasatrain/models
     depends_on:
       - minio

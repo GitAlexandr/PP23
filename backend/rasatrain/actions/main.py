@@ -2,6 +2,8 @@ from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from minio import Minio
 from minio.error import S3Error
+from pydantic import BaseModel
+from rasa.core.agent import Agent
 
 app = FastAPI()
 
