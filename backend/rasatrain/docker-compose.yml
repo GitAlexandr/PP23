@@ -4,11 +4,12 @@ services:
   minio:
     image: minio/minio
     container_name: minio
+    command: server --address 0.0.0.0:9000 /data
     environment:
-      MINIO_ACCESS_KEY: minioadmin
-      MINIO_SECRET_KEY: minioadmin
+      MINIO_ACCESS_KEY: SfE3aOzz2jpCgsrjZwHd
+      MINIO_SECRET_KEY: 9aBQUzn2cqyNTZQg3LqQIcq8QZiAIR4ZkJSS0i2A
     volumes:
-      - /path/to/minio/data:/data
+      - /Users/sasha/Desktop/pp/PP23/backend/rasatrain/minio
     ports:
       - "9000:9000"
     command: server /data
@@ -21,10 +22,10 @@ services:
     ports:
       - "8000:8000"
     environment:
-      MINIO_SERVER: minio
-      MINIO_ACCESS_KEY: minioadmin
-      MINIO_SECRET_KEY: minioadmin
-      MINIO_BUCKET_NAME: /backend/rasatrain/minio
+      MINIO_SERVER: http://172.25.0.2:9000
+      MINIO_ACCESS_KEY: SfE3aOzz2jpCgsrjZwHd
+      MINIO_SECRET_KEY: 9aBQUzn2cqyNTZQg3LqQIcq8QZiAIR4ZkJSS0i2A
+      MINIO_BUCKET_NAME: test
       RASA_MODEL_PATH: /backend/rasatrain/models
     depends_on:
       - minio
