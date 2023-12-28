@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from minio import Minio
 from minio.error import S3Error
 from pydantic import BaseModel
-# from rasa.core.agent import Agent
+from rasa.core.agent import Agent
 import tempfile
 import os
 import shutil
@@ -27,26 +27,26 @@ app.add_middleware(
 class Message(BaseModel):
     message: str
 
-# rasa_model_path = "/home/sirius/Рабочий стол/rasatrain/models"
-# rasa_agent = Agent.load(rasa_model_path)
+rasa_model_path = "../models"
+rasa_agent = Agent.load(rasa_model_path)
 
 # MinIO configuration
 minio_client = Minio(
-    "0.0.0.0:9000",
-    access_key="SfE3aOzz2jpCgsrjZwHd",
-    secret_key="9aBQUzn2cqyNTZQg3LqQIcq8QZiAIR4ZkJSS0i2A",
+    "127.0.0.1:9000",
+    access_key="minioaccesskey",
+    secret_key="miniosecretkey",
     secure=False
 )
-minio_bucket_name = "test"
+minio_bucket_name = "backet"
 
 
-# @app.post("/chat")
-# async def chat(message: Message):
-#     try:
-#         response = await rasa_agent.handle_text(message.message)
-#         return {"response": response[0]["text"]}
-#     except Exception as e:
-#         raise HTTPException(status_code=500, detail="Internal Server Error")
+@app.post("/chat")
+async def chat(message: Message):
+    try:
+        response = await rasa_agent.handle_text(message.message)
+        return {"response": response[0]["text"]}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail="Internal Server Error")
 
 
 @app.post("/uploadfile")
