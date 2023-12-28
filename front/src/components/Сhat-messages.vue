@@ -35,6 +35,7 @@ const messages = computed(() => store.getters.getMessages);
     width: auto;
     opacity: 0.3;
     z-index: 2;
+    pointer-events: none;
   }
 
   .container {

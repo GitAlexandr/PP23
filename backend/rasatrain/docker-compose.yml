@@ -1,31 +1,13 @@
-version: "3.8"
+version: "3"
 
 services:
   minio:
-    image: minio/minio
-    container_name: minio
-    command: server --address 0.0.0.0:9000 /data
-    environment:
-      MINIO_ACCESS_KEY: SfE3aOzz2jpCgsrjZwHd
-      MINIO_SECRET_KEY: 9aBQUzn2cqyNTZQg3LqQIcq8QZiAIR4ZkJSS0i2A
+    image: minio/minio:latest
     volumes:
-      - /Users/sasha/Desktop/pp/PP23/backend/rasatrain/minio
+      - minio-data./data
+    environment:
+      MINIO_ROOT_USER: minioaccesskey
+      MINIO_ROOT_PASSWORD: miniosecretkey
+    command: server /data
     ports:
       - "9000:9000"
-    command: server /data
-
-  fastapi:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: fastapi
-    ports:
-      - "8000:8000"
-    environment:
-      MINIO_SERVER: http://172.25.0.2:9000
-      MINIO_ACCESS_KEY: SfE3aOzz2jpCgsrjZwHd
-      MINIO_SECRET_KEY: 9aBQUzn2cqyNTZQg3LqQIcq8QZiAIR4ZkJSS0i2A
-      MINIO_BUCKET_NAME: test
-      RASA_MODEL_PATH: /backend/rasatrain/models
-    depends_on:
-      - minio

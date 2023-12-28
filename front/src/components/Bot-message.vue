@@ -1,6 +1,7 @@
 <template>
   <div class="message">
     <div v-if="props.content.text" class="message-text">{{ content.text }}</div>
+    <a v-if="props.content.file_url" class="message-file-url" :href="content.file_url" target="_blank">{{content.file_url}}</a>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .message {
+  overflow: hidden;
   position: relative;
   z-index: 2;
   width: 75%;
@@ -28,23 +30,15 @@ const props = defineProps({
   box-shadow: 0 4px 6px var(--box-shadow-color);
   border: 2px solid var(--main-color);
   background: var(--background-color);
+}
 
-  &-button {
-    margin-left: 16px;
-    padding: 8px;
-    border-radius: 8px;
-    background: var(--main-color);
-    color: var(--text-color-white);
-    border: 0;
+.message-file-url {
+  word-break: break-all; /* или word-break: break-word; */
+  color: var(--link-color); /* Замените на цвет вашей ссылки */
+  text-decoration: underline; /* Подчеркивание для ссылки */
+}
 
-    &:hover {
-      transform: scale(1.01);
-    }
-
-    &:active {
-      transform: scale(0.99);
-
-    }
-  }
+.message-file-url:hover {
+  text-decoration: none; /* Убираем подчеркивание при наведении */
 }
 </style>

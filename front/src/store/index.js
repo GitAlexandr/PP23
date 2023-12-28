@@ -78,6 +78,66 @@ const store = createStore({
                 console.error('Ошибка при отправке запроса: ', error);
             }
         },
+
+        async sendAMessageVoice({ commit }, audio) {
+            try {
+                const response = await axios.post('http://127.0.0.1:8000/uploadFile', { audio });
+
+                const userMessage = {
+                    author: 'user',
+                    content: {
+                        audio: audio,
+                    },
+                };
+
+                const botMessage = {
+                    author: 'bot',
+                    content: {
+                        text: response.data.response,
+                    },
+                };
+
+                commit('addMessage', userMessage);
+                commit('addMessage', botMessage);
+            } catch (error) {
+                console.error('Ошибка при отправке запроса: ', error);
+            }
+        },
+        // uploadfile
+
+        async sendAMessageFile({ commit }, file) {
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+
+                const response = await axios.post('http://127.0.0.1:8000/uploadfile', formData, {
+                    headers: {
+                        'accept': 'application/json',
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+
+                const userMessage = {
+                    author: 'user',
+                    content: {
+                        text: 'text',
+                    },
+                };
+
+                const botMessage = {
+                    author: 'bot',
+                    content: {
+                        file_url: response.data.file_url,
+                    },
+                };
+
+                commit('addMessage', userMessage);
+                commit('addMessage', botMessage);
+            } catch (error) {
+                console.error('Ошибка при отправке запроса: ', error);
+            }
+        },
+
     },
 });
 

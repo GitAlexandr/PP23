@@ -1,57 +1,76 @@
 <template>
   <div class="container">
-    <img :src="ava" alt="аватарка">
+    <div class="ava" ref="avaRef">
+      <transition name="avatar-transition">
+        <img :src="avatar" alt="Аватар" key="avatar" />
+      </transition>
+    </div>
     <div class="buttons">
       <div>
-        <input class="hide" type="file" ref="fileInput" @change="handleFileChange"/>
+        <input class="hide" type="file" ref="fileInput" @change="handleFileChange" />
         <button class="button file-input" @click="uploadFile">Загрузить файл</button>
       </div>
       <button class="button" @click="clearMessages">Очистить</button>
-      <list-of-skills/>
+      <ListOfSkills />
     </div>
   </div>
 </template>
 
 <script setup>
-import ava from "@/assets/ava.jpg"
-import {useStore} from "vuex"
-import {ref} from 'vue'
-import ListOfSkills from "@/components/List-of-skills.vue"
+import { useStore } from "vuex";
+import { ref, onMounted } from 'vue';
+import Hammer from 'hammerjs';
+import ListOfSkills from '@/components/List-of-skills.vue';
 
-const store = useStore()
+const store = useStore();
+const fileInput = ref(null);
+const avatarIndex = ref(0);
+const avatar = ref('');
+const avatarElement = ref(null);
 
-function clearMessages() {
-  store.commit("clearMessage")
+async function loadImageArray() {
+  const context = import.meta.glob('@/assets/ava/*');
+  const keys = Object.keys(context);
+  const files = await Promise.all(keys.map(key => context[key]()));
+
+  return files.filter(file => file.default);
 }
 
-const fileInput = ref(null)
+function clearMessages() {
+  store.commit('clearMessage');
+}
 
-const handleFileChange = () => {
-  const file = fileInput.value.files[0];
+function handleFileChange() {
+  store.dispatch('sendAMessageFile', fileInput.value.files[0]);
+}
 
-  if (file) {
-    const reader = new FileReader();
+function uploadFile() {
+  fileInput.value.click();
+}
 
-    reader.onload = (event) => {
-      const fileContent = event.target.result;
+onMounted(async () => {
+  const avaImagesArray = await loadImageArray();
+  avatarElement.value = document.querySelector('.ava');
 
-      const fileInput = {
-        name: file.name,
-        size: file.size,
-        content: fileContent,
+  if (avatarElement.value) {
+    const avatarSwipeHandler = new Hammer.Manager(avatarElement.value);
+    avatarSwipeHandler.add(new Hammer.Swipe({direction: Hammer.DIRECTION_HORIZONTAL}));
+
+    avatarSwipeHandler.on('swiperight swipeleft', (e) => {
+      if (e.type === 'swiperight' && avatarIndex.value < avaImagesArray.length - 1) {
+        // Свайп вправо
+        avatarIndex.value += 1;
+      } else if (e.type === 'swipeleft' && avatarIndex.value > 0) {
+        // Свайп влево
+        avatarIndex.value -= 1;
       }
 
-      store.dispatch('sendAMessageFile', fileInput)
-      store.dispatch('chatHistory');
-    };
+      avatar.value = avaImagesArray[avatarIndex.value].default;
+    });
 
-    reader.readAsDataURL(file);
+    avatarSwipeHandler.get('swipe').set({enable: true});
   }
-};
-
-const uploadFile = () => {
-  fileInput.value.click()
-};
+});
 </script>
 
 <style scoped lang="scss">
@@ -64,23 +83,28 @@ const uploadFile = () => {
   flex-direction: column;
   box-shadow: 0 4px 6px var(--box-shadow-color);
 
-  img {
-    margin: 0 auto;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    border: 4px solid var(--main-color);
-    box-shadow: 0 4px 6px var(--box-shadow-color);
-  }
+  .ava {
+    display: flex;
+    justify-content: center;
 
-  .file-input {
-    width: 100%;
+    img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 4px solid var(--main-color);
+      box-shadow: 0 4px 6px var(--box-shadow-color);
+      pointer-events: none;
+    }
   }
 
   .buttons {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
+
+    .file-input {
+      width: 100%;
+    }
 
     .button {
       margin: 4px 0;

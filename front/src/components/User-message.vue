@@ -3,16 +3,16 @@
     <div v-if="content.text" class="message-text">{{ content.text }}</div>
 
     <div v-if="content.audio" class="message-audio">
-      <audio class="audio" :src="content.audio" controls></audio>
+      <audio class="audio" :src="content.audio" controls />
     </div>
 
     <div v-if="content.file" class="message-file">
       <button class="message-download-button" @click.prevent="downloadFile">
-        <svg-icon type="mdi" :path="mdiFile"></svg-icon>
+        <svg-icon type="mdi" :path="mdiFile" />
       </button>
       <span class="name-file">{{ content.file.name }}</span>
       <span class="size-file">{{ formatFileSize(content.file.size) }}</span>
-      <a :href="content.file.url" :download="content.file.name" ref="downloadLink"></a>
+      <a :href="content.file.url" :download="content.file.name" ref="downloadLink" />
     </div>
   </div>
 </template>
@@ -66,15 +66,15 @@ const downloadFile = () => {
   color: var(--text-color-white);
 
   &-audio {
-    height: 50px; // Задайте конкретную высоту или корректируйте по необходимости
-    width: 100%; // Задайте конкретную ширину или корректируйте по необходимости
+    height: 50px;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 
     .audio {
-      width: 100%; // Аудио-элемент займет всю доступную ширину
-      height: 100%; // Аудио-элемент займет всю доступную высоту
+      width: 100%;
+      height: 100%;
     }
   }
 

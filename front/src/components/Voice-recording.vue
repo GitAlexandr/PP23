@@ -1,6 +1,6 @@
 <template>
   <button @click="toggleRecording">
-    <SvgIcon class="mdi" type="mdi" :path="mdiMicrophone"></SvgIcon>
+    <SvgIcon class="mdi" type="mdi" :path="mdiMicrophone" />
   </button>
 </template>
 
@@ -10,7 +10,6 @@ import { useStore } from 'vuex';
 
 import SvgIcon from '@jamescoyle/vue-icon';
 import { mdiMicrophone } from '@mdi/js';
-import store from "@/store/index.js";
 
 export default {
   components: {
@@ -40,7 +39,7 @@ export default {
           const audioUrl = URL.createObjectURL(audioBlob);
 
           store.dispatch('sendAMessageVoice', audioUrl)
-          store.dispatch('chatHistory');
+          // store.dispatch('chatHistory');
         }
 
         mediaRecorder.start();
@@ -85,8 +84,8 @@ button {
   align-items: center;
   justify-content: center;
   margin-left: 4px;
-  width: 24px; /* увеличил ширину кнопки */
-  height: 24px; /* увеличил высоту кнопки */
+  width: 24px;
+  height: 24px;
   background: var(--text-color-dark-grey);
   border: 0;
   border-radius: 50%;
@@ -94,9 +93,9 @@ button {
 }
 
 .mdi {
-  width: 20px !important; /* увеличил ширину иконки */
-  height: 20px !important; /* увеличил высоту иконки */
-  font-size: 20px; /* увеличил размер иконки */
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 20px;
 }
 </style>
 

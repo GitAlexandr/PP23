@@ -8,8 +8,8 @@ RUN pip install --no-cache-dir --upgrade pip
 WORKDIR /actions
 
 # Copy requirements and install dependencies
-COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+
+COPY models /models
 
 # Copy the rest of the application code
 COPY . .

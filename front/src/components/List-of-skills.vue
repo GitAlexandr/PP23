@@ -62,15 +62,14 @@ function handleStatusSwitch(index) {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw; /* Занимает 100% ширины экрана */
-  height: 100vh; /* Занимает 100% высоты экрана */
-  background-color: rgba(0, 0, 0, 0.5); /* Прозрачный черный фон */
-  //background-color: rgba(var(--transparent-black-background)); /* Прозрачный черный фон */
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2; /* Выше других элементов на странице */
-  backdrop-filter: blur(5px); /* Размытие фона */
+  z-index: 2;
+  backdrop-filter: blur(5px);
 }
 
 .list-skills {
